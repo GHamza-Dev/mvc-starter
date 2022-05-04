@@ -1,5 +1,7 @@
 <?php
 session_start();
+// Require composer autoloader
+require __DIR__ . '/vendor/autoload.php';
 
 define('DS', DIRECTORY_SEPARATOR);
 require_once './config/config.php';
@@ -9,13 +11,11 @@ require_once ROOT.'/helpers/session.php';
 require_once './dump.php';
 
 spl_autoload_register(function($className){
-  try {
-    if(file_exists(CORE_PATH.DS.$className.'.php'))
-    require_once CORE_PATH.DS.$className.'.php';
-  } catch (Exception $e) {
-    die($e->getMessage());
-  }
+  include $className.'.php';
 });
 
+$router = new \Bramus\Router\Router();
 
-new Router();
+require __DIR__.'/routes.php';
+
+$router->run();

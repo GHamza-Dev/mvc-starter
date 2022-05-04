@@ -1,15 +1,20 @@
 <?php
 
+namespace App\Controllers;
+use Core\Controller;
+
 class HomeController extends Controller{
 
     public function index(){
-        $this->data['message'] = 'Welcome to the home page';
-        $this->data['alert'] = 'Welcome';
-        $this->data['err'] = false;
-        $this->response($this->data);
+        $this->res['message'] = 'Welcome to the home page';
+        $this->res['alert'] = 'Welcome';
+        $this->res['err'] = false;
+        $this->res['code'] = 200;
+        $this->res['data'] = ["hamza","yassine","ayoub"];
+        $this->response();
     }
     
-    public function test(){
-        $this->response($this->request());
+    public function hello(){
+        echo "Hello world!";
     }
 }
